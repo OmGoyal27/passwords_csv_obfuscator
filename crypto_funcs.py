@@ -23,8 +23,12 @@ def decrypt(enc_text: str, password: str) -> str:
     iv = raw[:16]
     ciphertext = raw[16:]
     cipher = AES.new(key, AES.MODE_CBC, iv)
-    decrypted = unpad(cipher.decrypt(ciphertext), AES.block_size)
-    return decrypted.decode('utf-8')
+    try:
+        decrypted = unpad(cipher.decrypt(ciphertext), AES.block_size)
+        return decrypted.decode('utf-8')
+    except (ValueError, KeyError) as e:
+        print("Decryption failed:", e)
+        return None
 
 # --- Example usage ---
 if __name__ == "__main__":
@@ -34,5 +38,5 @@ if __name__ == "__main__":
     enc = encrypt(text, password)
     print("Encrypted:", enc)
 
-    dec = decrypt(enc, password)
+    dec = decrypt(enc, "blakd")
     print("Decrypted:", dec)
