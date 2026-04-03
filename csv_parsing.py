@@ -32,3 +32,15 @@ def get_csv_rows():
     next(csv_reader)  # Skip headers
     rows = list(csv_reader)  # Get the remaining rows
     return rows
+
+def write_csv_data(headers, rows, file_path: str):
+    try:
+        with open(file_path, mode='w', newline='') as csv_file:
+            csv_writer = csv.writer(csv_file)
+            csv_writer.writerow(headers)  # Write headers
+            csv_writer.writerows(rows)    # Write data rows
+        logging.info(f"Data successfully written to {csv_file_path}.")
+    except Exception as e:
+        logging.error(f"An error occurred while writing to the file: {e}")
+
+write_csv_data(get_csv_headers(), get_csv_rows(), "daaa.csv")
