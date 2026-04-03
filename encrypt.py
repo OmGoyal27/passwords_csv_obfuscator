@@ -5,7 +5,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-def main(file_path: str | Path = None, password: str = None, suffix: str = '.enc'):
+def main(file_path: str | Path = None, password: str = None, suffix: str = '.csv'):
     if not file_path:
         file_path = input("Enter the path to the CSV file: ")
     if not Path(file_path).is_file():
