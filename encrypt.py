@@ -1,13 +1,16 @@
 from pathlib import Path
 from crypto_funcs import encrypt
 
-def main(suffix: str = '.enc'):
-    file_path = input("Enter the path to the CSV file: ")
+def main(file_path: str = None, password: str = None, suffix: str = '.enc'):
+    if not file_path:
+        file_path = input("Enter the path to the CSV file: ")
     if not Path(file_path).is_file():
         print("File not found. Please check the path and try again.")
         return
     file_path = Path(file_path)
-    password = input("Enter the password for encryption: ")
+    
+    if not password:
+        password = input("Enter the password for encryption: ")
 
     try:
         with file_path.open('r') as f:
