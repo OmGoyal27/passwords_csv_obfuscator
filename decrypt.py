@@ -1,5 +1,6 @@
 from pathlib import Path
 from crypto_funcs import decrypt
+import pwinput
 
 def main(file_path: str = None, password: str = None, suffix: str = '.csv'):
     if not file_path:
@@ -9,7 +10,7 @@ def main(file_path: str = None, password: str = None, suffix: str = '.csv'):
         return
     file_path = Path(file_path)
     if not password:
-        password = input("Enter the password for decryption: ")
+        password = pwinput.pwinput("Enter the password for decryption: ", "*")
 
     try:
         with file_path.open('r') as f:
