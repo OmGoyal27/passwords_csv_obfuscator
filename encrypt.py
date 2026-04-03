@@ -2,7 +2,7 @@ from pathlib import Path
 from crypto_funcs import encrypt
 import pwinput
 
-def main(file_path: str = None, password: str = None, suffix: str = '.enc'):
+def main(file_path: str | Path = None, password: str = None, suffix: str = '.enc'):
     if not file_path:
         file_path = input("Enter the path to the CSV file: ")
     if not Path(file_path).is_file():
