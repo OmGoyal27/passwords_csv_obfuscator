@@ -23,3 +23,12 @@ def get_csv_headers():
     csv_reader = csv.reader(csv_data)
     headers = next(csv_reader)  # Get the first row as headers
     return headers
+
+def get_csv_rows():
+    csv_data = get_csv_data_raw()
+    if csv_data is None:
+        return None
+    csv_reader = csv.reader(csv_data)
+    next(csv_reader)  # Skip headers
+    rows = list(csv_reader)  # Get the remaining rows
+    return rows
