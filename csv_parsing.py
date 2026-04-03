@@ -50,4 +50,16 @@ def write_csv_data(headers, rows, file_path: str):
     except Exception as e:
         logging.error(f"An error occurred while writing to the file: {e}")
 
-write_csv_data(get_csv_headers(), get_csv_rows(), "daaa.csv")
+def is_header_format_valid(headers: list[str]) -> bool:
+    if not headers:
+        logging.warning("Headers are empty.")
+        return False
+    
+    must_have = ["url", "username", "password"]
+
+    for header in must_have:
+        if header not in headers:
+            logging.warning(f"Missing required header: {header}")
+            return False
+    
+    return True
