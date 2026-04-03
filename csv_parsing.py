@@ -16,6 +16,13 @@ def get_csv_data_raw():
         logging.error(f"An error occurred while reading the file: {e}")
         return None
 
+def get_csv_data_dict() -> list[dict[str, str]] | None:
+    csv_data = get_csv_data_raw()
+    if csv_data is None:
+        return None
+    csv_reader = csv.DictReader(csv_data)
+    return list(csv_reader)  # Convert the reader to a list of dictionaries
+
 def get_csv_headers():
     csv_data = get_csv_data_raw()
     if csv_data is None:
