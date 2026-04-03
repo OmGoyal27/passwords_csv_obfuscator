@@ -1,7 +1,7 @@
 import csv
 import logging
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
 csv_file_path = 'data.csv'      # Temporary file path for the CSV file
 
@@ -10,10 +10,10 @@ def get_csv_data_raw():
         with open(csv_file_path, mode='r') as csv_file:
             return csv_file.readlines()
     except FileNotFoundError:
-        logging.error(f"File {csv_file_path} not found.")
+        logger.error(f"File {csv_file_path} not found.")
         return None
     except Exception as e:
-        logging.error(f"An error occurred while reading the file: {e}")
+        logger.error(f"An error occurred while reading the file: {e}")
         return None
 
 def get_csv_data_dict() -> list[dict[str, str]] | None:
@@ -46,20 +46,20 @@ def write_csv_data(headers, rows, file_path: str):
             csv_writer = csv.writer(csv_file)
             csv_writer.writerow(headers)  # Write headers
             csv_writer.writerows(rows)    # Write data rows
-        logging.info(f"Data successfully written to {csv_file_path}.")
+        logger.info(f"Data successfully written to {csv_file_path}.")
     except Exception as e:
-        logging.error(f"An error occurred while writing to the file: {e}")
+        logger.error(f"An error occurred while writing to the file: {e}")
 
 def is_header_format_valid(headers: list[str]) -> bool:
     if not headers:
-        logging.warning("Headers are empty.")
+        logger.warning("Headers are empty.")
         return False
     
     must_have = ["url", "username", "password"]
 
     for header in must_have:
         if header not in headers:
-            logging.warning(f"Missing required header: {header}")
+            logger.warning(f"Missing required header: {header}")
             return False
     
     return True
