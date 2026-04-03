@@ -1,5 +1,6 @@
 from pathlib import Path
 from crypto_funcs import encrypt
+import pwinput
 
 def main(file_path: str = None, password: str = None, suffix: str = '.enc'):
     if not file_path:
@@ -10,7 +11,7 @@ def main(file_path: str = None, password: str = None, suffix: str = '.enc'):
     file_path = Path(file_path)
     
     if not password:
-        password = input("Enter the password for encryption: ")
+        password = pwinput.pwinput(prompt="Enter the password for encryption: ", mask='*')
 
     try:
         with file_path.open('r') as f:
