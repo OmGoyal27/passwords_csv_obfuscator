@@ -1,12 +1,15 @@
 from pathlib import Path
 from crypto_funcs import decrypt
 import pwinput
+import logging
+
+logger = logging.getLogger(__name__)
 
 def main(file_path: str | Path = None, password: str = None, suffix: str = '.csv'):
     if not file_path:
         file_path = input("Enter the path to the encrypted file: ")
     if not Path(file_path).is_file():
-        print("File not found. Please check the path and try again.")
+        logger.error("File not found. Please check the path and try again.")
         return
     file_path = Path(file_path)
     if not password:
@@ -19,11 +22,12 @@ def main(file_path: str | Path = None, password: str = None, suffix: str = '.csv
         if decrypted_content is not None:
             with open(file_path.with_suffix(suffix), 'w') as f:
                 f.write(decrypted_content)
+            logger.info(f"File decrypted successfully. Decrypted file: {file_path.with_suffix(suffix)}")
         else:
-            print("Decryption failed. Please check your password and try again.")
+            logger.error("Decryption failed. Please check your password and try again.")
 
     except Exception as e:
-        print(f"An error occurred: {e}")
+        logger.error(f"An error occurred: {e}")
 
 if __name__ == "__main__":
     main()
