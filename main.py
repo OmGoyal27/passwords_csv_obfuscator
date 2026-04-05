@@ -29,8 +29,10 @@ def main_terminal_default(action: Literal['E', 'D'] = None, file_path: str = Non
     choice = choice.strip().upper()
     if not file_path:
         file_path = input("Enter the path to the CSV file: ")
+
     if choice == 'D':
         decrypt.main(file_path)
+
     elif choice == 'E':
         csv_file_path = file_path  # Update the global variable with the user-provided path
         response_of_checks = pre_check_before_encryption(file_path)
