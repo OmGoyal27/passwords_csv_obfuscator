@@ -50,7 +50,7 @@ def main():
     group = parser.add_mutually_exclusive_group()
     group.add_argument('-e', '--encrypt', help='Encrypt a CSV file', type=str, metavar='FILE_PATH', default=None)
     group.add_argument('-d', '--decrypt', help='Decrypt a CSV file', type=str, metavar='FILE_PATH', default=None)
-    parser.add_argument('-p', '--password', help='Password for encryption/decryption (optional)', type=str, default=None)
+    parser.add_argument('-p', '--password', help='Password for encryption/decryption (not recommended)', type=str, default=None)
     args = parser.parse_args()
 
     if not args.encrypt and not args.decrypt:
