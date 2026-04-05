@@ -2,6 +2,7 @@ import encrypt
 import decrypt
 from csv_parsing import get_csv_headers, is_header_format_valid, csv_file_path
 import logging
+from typing import Literal
 import argparse
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -18,8 +19,13 @@ def pre_check_before_encryption(file_path: str) -> bool:
     
     return True
 
-def main_terminal_default():
-    choice = input("Do you want to (E)ncrypt or (D)ecrypt a file? (E/D): ").strip().upper()
+def main_terminal_default(action: Literal['E', 'D'] = None):
+    if action is None:
+        choice = input("Do you want to (E)ncrypt or (D)ecrypt a file? (E/D): ")
+    else:
+        choice = action
+    
+    choice = choice.strip().upper()
     if choice == 'D':
         decrypt.main()
     elif choice == 'E':
