@@ -64,7 +64,7 @@ def main():
         choice = 'D'
         filepath = args.decrypt
 
-    main_terminal_default(action=choice, file_path=filepath)
+    main_terminal_default(action=choice, file_path=filepath, password=args.password)
 
 if __name__ == "__main__":
     main()
