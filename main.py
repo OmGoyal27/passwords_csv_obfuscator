@@ -42,5 +42,19 @@ def main_terminal_default(action: Literal['E', 'D'] = None):
         
         encrypt.main(file_path=file_path)
 
+def main():
+    parser = argparse.ArgumentParser(description="Encrypt or Decrypt CSV files containing credentials.")
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument('-e', '--encrypt', help='Encrypt a CSV file', type=str, metavar='FILE_PATH', default=None)
+    group.add_argument('-d', '--decrypt', help='Decrypt a CSV file', type=str, metavar='FILE_PATH', default=None)
+    args = parser.parse_args()
+
+    if not args.encrypt and not args.decrypt:
+        main_terminal_default()
+        return
+    
+    choice = 'E' if args.encrypt else 'D'
+    main_terminal_default(action=choice)
+
 if __name__ == "__main__":
-    main_terminal_default()
+    main()
