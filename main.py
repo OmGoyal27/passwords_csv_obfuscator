@@ -19,7 +19,7 @@ def pre_check_before_encryption(file_path: str) -> bool:
     
     return True
 
-def main_terminal_default(action: Literal['E', 'D'] = None, file_path: str = None):
+def main_terminal_default(action: Literal['E', 'D'] = None, file_path: str = None, password: str = None):
     global csv_file_path
     if action is None:
         choice = input("Do you want to (E)ncrypt or (D)ecrypt a file? (E/D): ")
@@ -31,7 +31,7 @@ def main_terminal_default(action: Literal['E', 'D'] = None, file_path: str = Non
         file_path = input("Enter the path to the CSV file: ")
 
     if choice == 'D':
-        decrypt.main(file_path)
+        decrypt.main(file_path, password)
 
     elif choice == 'E':
         csv_file_path = file_path  # Update the global variable with the user-provided path
@@ -43,7 +43,7 @@ def main_terminal_default(action: Literal['E', 'D'] = None, file_path: str = Non
             if choice_for_overwrite != 'Y':
                 return
         
-        encrypt.main(file_path=file_path)
+        encrypt.main(file_path=file_path, password=password)
 
 def main():
     parser = argparse.ArgumentParser(description="Encrypt or Decrypt CSV files containing credentials.")
