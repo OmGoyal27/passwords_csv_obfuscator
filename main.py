@@ -19,19 +19,20 @@ def pre_check_before_encryption(file_path: str) -> bool:
     
     return True
 
-def main_terminal_default(action: Literal['E', 'D'] = None):
+def main_terminal_default(action: Literal['E', 'D'] = None, file_path: str = None):
+    global csv_file_path
     if action is None:
         choice = input("Do you want to (E)ncrypt or (D)ecrypt a file? (E/D): ")
     else:
         choice = action
     
     choice = choice.strip().upper()
-    if choice == 'D':
-        decrypt.main()
-    elif choice == 'E':
+    if not file_path:
         file_path = input("Enter the path to the CSV file: ")
+    if choice == 'D':
+        decrypt.main(file_path)
+    elif choice == 'E':
         csv_file_path = file_path  # Update the global variable with the user-provided path
-
         response_of_checks = pre_check_before_encryption(file_path)
 
         if not response_of_checks:
@@ -53,8 +54,14 @@ def main():
         main_terminal_default()
         return
     
-    choice = 'E' if args.encrypt else 'D'
-    main_terminal_default(action=choice)
+    if args.encrypt:
+        choice = 'E'
+        filepath = args.encrypt
+    else:
+        choice = 'D'
+        filepath = args.decrypt
+
+    main_terminal_default(action=choice, file_path=filepath)
 
 if __name__ == "__main__":
     main()
