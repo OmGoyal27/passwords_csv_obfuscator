@@ -45,3 +45,5 @@ If you prefer a single prompt flow that validates CSV headers before encryption,
 
 **License**
 See [LICENCE.txt](LICENCE.txt) for licensing details.
+
+I am not responsible for any data loss caused by this project.
