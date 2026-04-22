@@ -6,6 +6,7 @@ Lightweight tools to obfuscate (encrypt) and recover (decrypt) password-export C
 - Encrypt CSV exports containing password entries.
 - Decrypt previously encrypted CSVs back to plain CSV.
 - Simple CLI prompts; the master password is never stored.
+- Supports all major OS (Windows, MacOS, Linux)
 
 **Requirements**
 - Python 3.8 or newer
