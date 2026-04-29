@@ -19,7 +19,7 @@ def pre_check_before_encryption(file_path: str) -> bool:
     
     return True
 
-def main_terminal_default(action: Literal['E', 'D'] = None, file_path: str = None, password: str = None):
+def _ask_encrypt_or_decrypt_terminal(action: Literal['E', 'D'] = None, file_path: str = None, password: str = None):
     global csv_file_path
     if action is None:
         choice = input("Do you want to (E)ncrypt or (D)ecrypt a file? (E/D): ")
@@ -54,7 +54,7 @@ def main():
     args = parser.parse_args()
 
     if not args.encrypt and not args.decrypt:
-        main_terminal_default()
+        _ask_encrypt_or_decrypt_terminal()
         return
     
     if args.encrypt:
@@ -64,7 +64,7 @@ def main():
         choice = 'D'
         filepath = args.decrypt
 
-    main_terminal_default(action=choice, file_path=filepath, password=args.password)
+    _ask_encrypt_or_decrypt_terminal(action=choice, file_path=filepath, password=args.password)
 
 if __name__ == "__main__":
     main()
